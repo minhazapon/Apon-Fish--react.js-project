@@ -8,6 +8,10 @@ import {
 } from "react-router-dom";
 import Root from './Root';
 import Home from './Home';
+import Login from './Login';
+import SignUp from './SignUp';
+import AuthContext from './firebase/AuthContext';
+import PrivateRoute from './firebase/PrivateRoute';
 
 
 const router = createBrowserRouter([
@@ -17,7 +21,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element:  <Home></Home>  ,
+        element:    <PrivateRoute><Home></Home></PrivateRoute>  ,
+      },
+      {
+        path: "/login",
+        element:  <Login></Login>  ,
+      },
+      {
+        path: "/up",
+        element:  <SignUp></SignUp> ,
       },
     ],
   },
@@ -25,6 +37,14 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+
+    
+     <AuthContext>
+      
      <RouterProvider router={router} />
+
+     </AuthContext>
+
+    
   </React.StrictMode>,
 )
